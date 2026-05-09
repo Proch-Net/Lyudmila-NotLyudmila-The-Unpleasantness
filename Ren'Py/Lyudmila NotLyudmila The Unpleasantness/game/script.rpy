@@ -74,7 +74,11 @@ define credits_text = """
 
 {b}Разработчики:{/b}
 
+Producer — Костя
+
 Lead Developer — Костя
+
+Editor — Паша 
 
 Leader Writer — Паша
 

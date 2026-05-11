@@ -8,6 +8,14 @@
     # Контейнер для кнопок слева
     use navigation
 
+    # --- НАДПИСЬ С ВЕРСИЕЙ СПРАВА ВНИЗУ ---
+    text "v. [config.version] beta":
+        xalign 0.99          
+        yalign 0.99          
+        size 28              # Сделали крупнее (было 18)
+        color "#a0a0a0"      # Сделал цвет чуть светлее, чтобы лучше читалось
+        outlines [(2, "#000000", 0, 0)] # Увеличили обводку до 2 пикселей под новый размер
+
 screen navigation():
     vbox:
         style_prefix "navigation"
@@ -29,6 +37,66 @@ screen navigation():
             textbutton _("Главное меню") action MainMenu()
 
         textbutton _("Выход") action Quit(confirm=not main_menu)
+
+screen ok_messenger():
+    # Полупрозрачный черный фон вокруг телефона, чтобы игра ушла на задний план
+    add Solid("#000000aa")
+
+    # Сам корпус телефона (по центру экрана)
+    frame:
+        xalign 0.5
+        yalign 0.5
+        xsize 450
+        ysize 800
+        background Solid("#ffffff") # Белый фон приложения
+        padding (0, 0)
+
+        vbox:
+            # Шапка "Одноклассники"
+            frame:
+                xfill True
+                ysize 80
+                background Solid("#f58220") # Фирменный оранжевый цвет ОК
+                text "Одноклассники" xalign 0.5 yalign 0.5 size 28 bold True color "#ffffff"
+
+            # Окно с перепиской (можно скроллить)
+            viewport:
+                mousewheel True
+                draggable True
+                yfill True
+                yadjustment ok_yadj
+                
+                frame:
+                    background None
+                    padding (20, 20)
+                    xfill True
+
+                    vbox:
+                        spacing 15
+                        xfill True
+
+                        # Движок перебирает все сообщения и рисует их
+                        for m in ok_messages:
+                            if m["align"] == "left":
+                                # Входящие (например, от Паши) - слева, серые
+                                vbox:
+                                    xalign 0.0
+                                    spacing 5
+                                    text m["sender"] size 16 color "#888888"
+                                    frame:
+                                        background Solid("#e5e5e5")
+                                        padding (15, 10)
+                                        text m["text"] size 22 color "#000000"
+                            else:
+                                # Исходящие (твои) - справа, светло-оранжевые
+                                vbox:
+                                    xalign 1.0
+                                    spacing 5
+                                    text m["sender"] size 16 color "#888888" xalign 1.0
+                                    frame:
+                                        background Solid("#ffebd6") 
+                                        padding (15, 10)
+                                        text m["text"] size 22 color "#000000"
 
 screen game_menu(title, scroll=None, yinitial=0.0):
     tag menu

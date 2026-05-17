@@ -38,6 +38,88 @@ screen navigation():
 
         textbutton _("Выход") action Quit(confirm=not main_menu)
 
+screen ok_chat_list():
+    # Затемнение фона вокруг телефона
+    add Solid("#000000aa")
+
+    # Корпус телефона
+    frame:
+        xalign 0.5
+        yalign 0.5
+        xsize 450
+        ysize 800
+        background Solid("#ffffff")
+        padding (0, 0)
+
+        vbox:
+            # Шапка "Одноклассники"
+            frame:
+                xfill True
+                ysize 80
+                background Solid("#f58220")
+                text "Одноклассники" xalign 0.5 yalign 0.5 size 28 bold True color "#ffffff"
+
+            # Блок со списком чатов
+            frame:
+                background Solid("#e5e5e5")
+                padding (0, 0)
+                
+                vbox:
+                    # Spacing 2 и серый фон под ним создают эффект разделительных полос
+                    spacing 2
+
+                    # --- Чат 1: Группа класса ---
+                    frame:
+                        xfill True
+                        ysize 95
+                        background Solid("#ffffff")
+                        padding (20, 10)
+                        vbox:
+                            spacing 5
+                            # Название беседы
+                            text "9-Б" size 24 bold True color "#000000"
+                            # Кто написал и сообщение (в одну строчку)
+                            text "Ольга Андреевна: Матвей больше не наш одноклассник, он переводится." size 18 color "#888888"
+
+                    # --- Чат 2: Личные сообщения (Марина) ---
+                    frame:
+                        xfill True
+                        ysize 95
+                        background Solid("#ffffff")
+                        padding (20, 10)
+                        vbox:
+                            spacing 5
+                            text "Марина" size 24 bold True color "#000000"
+                            text "хорошо" size 18 color "#888888"
+
+                    # --- Чат 3: Личные сообщения (Савелий) ---
+                    frame:
+                        xfill True
+                        ysize 95
+                        background Solid("#ffffff")
+                        padding (20, 10)
+                        vbox:
+                            spacing 5
+                            text "Гриша" size 24 bold True color "#000000"
+                            text "Я кататья, поедешь со мной?" size 18 color "#888888"
+
+                    # --- Чат 4: Личные сообщения (Савелий) ---
+                    frame:
+                        xfill True
+                        ysize 95
+                        background Solid("#ffffff")
+                        padding (20, 10)
+                        vbox:
+                            spacing 5
+                            text "Савелий" size 24 bold True color "#000000"
+                            text "Тумба юмба, у меня пауки на стене." size 18 color "#888888"
+                            
+                    # Оставшееся пустое белое место снизу (чтобы серый фон разделителей не торчал)
+                    frame:
+                        xfill True
+                        yfill True
+                        background Solid("#ffffff")
+
 screen ok_messenger():
     # Полупрозрачный черный фон вокруг телефона, чтобы игра ушла на задний план
     add Solid("#000000aa")
